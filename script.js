@@ -48,13 +48,18 @@ function addTask() {
     deleteBtn.onclick = (e) => {
         e.stopPropagation();
         li.remove();
-        saveTasks(); // Salvează după ce ștergi
+        saveTasks(); // Save after deleting
     };
 
     li.appendChild(deleteBtn);
     document.getElementById("taskList").appendChild(li);
     input.value = "";
-    saveTasks(); // Salvează după ce adaugi
+    saveTasks(); // Save after adding
+
+    // Adjust container height dynamically
+    const todoContainer = document.querySelector(".todo-container");
+    todoContainer.style.height = "auto"; // Let it grow dynamically
+    console.log("Container height set to auto:", todoContainer.style.height);
 }
 
 // Funcția pentru a obține vremea
@@ -125,12 +130,25 @@ function deleteLastTask() {
 
 // Inițializare
 document.addEventListener("DOMContentLoaded", function () {
-    loadTasks(); // Încărcăm sarcinile din localStorage
-    loadWeather(); // Încărcăm vremea
-    loadTime(); // Încărcăm ora curentă
-    setInterval(updateTime, 1000); // Actualizăm ora la fiecare secundă
-    setInterval(() => loadWeather(), 3600000); // Actualizăm vremea la fiecare oră
-
+    loadTasks();
+    loadTime();
+    loadWeather();
+    
+    // Actualizează ora în fiecare secundă
+    setInterval(updateTime, 1000);
+    
+    // După 2 secunde, ia vremea nouă de pe net (ca să nu "omoare" ce era deja afișat)
+    setTimeout(() => {
+        getWeather('Ramnicu Valcea', 'current-weather-ramnicu-valcea');
+        getWeather('Bunesti', 'current-weather-bunesti');
+    }, 2000);
+    
+    // Și apoi actualizează vremea din oră în oră
+    setInterval(() => {
+        getWeather('Ramnicu Valcea', 'current-weather-ramnicu-valcea');
+        getWeather('Bunesti', 'current-weather-bunesti');
+    }, 3600000);
+    
     // Adăugarea sarcinilor
     document.getElementById('taskInput').addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
