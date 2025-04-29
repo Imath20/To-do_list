@@ -9,18 +9,20 @@
 
 </head>
 <body>
-    <div id="weather-container" class="weather-container">
-        <p id="current-weather-ramnicu-valcea"></p>
-        <p  id="current-weather-bunesti"></p>
-    </div>
-            <div id="time-container">
-            <p id="current-time"></p>
-     </div>
-        <ul id="taskList"></ul>
-    <div class="todo-container">
+
+     <div class="todo-container">
         <h1>Lista Mea de Task-uri</h1>
         <input type="text" id="taskInput" placeholder="Adaugă un task...">
         <button onclick="addTask()" class="add-btn">Adaugă Task</button>
+        
+        <ul id="taskList"></ul> <!-- MUTAT AICI -->
+        <div id="weather-container" class="weather-container">
+            <p id="current-weather-ramnicu-valcea"></p>
+            <p  id="current-weather-bunesti"></p>
+        </div>
+                <div id="time-container">
+                <p id="current-time"></p>
+         </div>
     </div>
 
 
